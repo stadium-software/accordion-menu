@@ -1,0 +1,6 @@
+:root {
+    --accordion-submenu-margin-right: 1.2rem;
+    --accordion-submenu-border-width: 0.1rem;
+    --accordion-submenu-border-color: transparent;
+    --accordion-menu-expand-speed: 0.35s;
+}
