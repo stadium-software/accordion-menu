@@ -5,7 +5,9 @@ Display the dropdown menu control as an accorion menu. This module works when yo
 ![](images/view.gif)
 
 # Version
-Initial 1.0
+1.0
+
+1.0.1 Various CSS adjustments and fixes
 
 # Setup
 
