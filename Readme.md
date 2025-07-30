@@ -1,6 +1,6 @@
 # Accordion Menu <!-- omit in toc -->
 
-Display the dropdown menu control as an accorion menu. This module works when your menu display direction is set to "TopToBottom" and when the menu is not very deep. 
+Display the dropdown menu control as an accordion menu. This module works when your menu display direction is set to "TopToBottom" and when the menu is not very deep. 
 
 ![](images/view.gif)
 
