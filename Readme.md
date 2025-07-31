@@ -9,6 +9,8 @@ Display the dropdown menu control as an accordion menu. This module works when y
 
 1.0.1 Various CSS adjustments and fixes
 
+1.1 The main CSS file no longer required in the *head* property of the application. The CSS is now loaded by the global script. All customisation variables commented out by default. 
+
 # Setup
 
 ## Application Setup
@@ -23,7 +25,8 @@ Display the dropdown menu control as an accordion menu. This module works when y
 3. Drag a *JavaScript* action into the script
 4. Add the Javascript below into the JavaScript code property
 ```javascript
-/* Stadium Script v1.0 https://github.com/stadium-software/accordion-menu */
+/* Stadium Script v1.1 https://github.com/stadium-software/accordion-menu */
+loadCSS();
 let scope = this;
 let openMultiple = ~.Parameters.Input.OpenMultiple;
 if (openMultiple !== true && openMultiple !== "true") {
@@ -41,6 +44,7 @@ if (menuEl.length == 0) {
     console.error("Multiple menus found with class: '" + menuClass + "'. Please use a unique class for each menu.");
 }
 menuEl = menuEl[0];
+menuEl.classList.add("stadium-accordion-menu");
 let menus = menuEl.querySelectorAll(".dropdown > a, .dropdown-submenu > a");
 for (let i=0;i<menus.length;i++) {
     createMenuToggleEvent(menus[i]);
@@ -117,10 +121,19 @@ function dmGet(control, p){
     }
     return getDMValues(control, p);
 }
+function loadCSS() {
+    if (!document.getElementById("stadium-accordion-menu-css")) {
+        let cssMain = document.createElement("style");
+        cssMain.id = "stadium-accordion-menu-css";
+        cssMain.type = "text/css";
+        cssMain.textContent = `.container:not(.mobile) .stadium-accordion-menu{interpolate-size:allow-keywords;.dropdown,.dropdown-menu,.dropdown-submenu{border:0;}.navbar-left>li:not(:last-of-type),li.dropdown-submenu:not(:last-of-type){border-bottom:var(--accordion-menu-item-border-bottom-width,var(--accordion-menu-item-border-bottom-width,0.1rem)) solid var(--accordion-menu-item-border-bottom-color,var(--MOBILE-MENU-ITEMS-BOTTOM-BORDER-COLOR,transparent));}.dropdown-menu{float:none;position:static;box-shadow:none;border-left:var(--accordion-submenu-border-width,0.1rem) solid var(--accordion-submenu-border-color,transparent);margin-left:var(--accordion-submenu-margin-right,1.2rem);.dropdown-item-text{width:100%;}}.dropdown.show>a .caret:after,.dropdown.show:hover>a .caret:after,.dropdown-submenu.show>a:first-child:after,.dropdown-submenu.show:hover>a:first-child:after{content:"\\f0d7";}a{display:flex;text-decoration:none;span:nth-child(2){margin-left:auto;gap:0.6rem;padding-right:0.7rem;}}.navbar-left .caret::after,.dropdown-submenu.expand-right>a:after{margin-left:1.2rem;cursor:pointer;color:var(--MENU-ARROW-COLOR,var(--MENU-ITEM-FONT-COLOR));}.navbar-nav>li:hover,.dropdown-menu>li:hover{color:inherit;background-color:inherit;}.dropdown>.dropdown-menu,.dropdown-submenu>.dropdown-menu{display:block;height:0;transition:height var(--accordion-menu-expand-speed,0.35s) ease;overflow-y:clip;padding-bottom:0;padding-top:0;margin-top:0;}.dropdown.show>.dropdown-menu,.dropdown-submenu.show>.dropdown-menu{display:block;height:calc-size(fit-content,size);}.dropdown:hover>.dropdown-menu,.dropdown-submenu:hover>.dropdown-menu{display:inherit;}}.stadium-accordion-menu{a:hover{color:var(--MENU-ITEM-HOVER-FONT-COLOR);background-color:var(--MENU-ITEM-HOVER-BACKGROUND-COLOR);}}/*DO NOT CHANGE BELOW THIS LINE*/html{min-height:100%;font-size:62.5%;.checkbox label,.checkbox-inline label,.radio label,.radio-inline label{font-size:var(--FORM-FONT-SIZE);}}`;
+        document.head.appendChild(cssMain);
+    }   
+}
 ```
 
 ## Page
-1. Add a menu control to yoru page and set the *Direction* property to "TopToBottom"
+1. Add a menu control to your page and set the *Direction* property to "TopToBottom"
 2. Add a unique class to the menu control *classes* property (e.g. stadium-accordion-menu)
 
 ![](images/MenuProps.png)
@@ -132,38 +145,17 @@ function dmGet(control, p){
    2. OpenMultiple: Set to true if you want to allow opening multiple menus at once (default is false)
    3. OpenParent: Set to false if you don't want the parent menu of the current page to be opened when the page loads (default is true)
 
-## CSS
-The CSS below is required for the correct functioning of the module. Variables exposed in the [*accordion-menu-variables.css*](accordion-menu-variables.css) file can be [customised](#customising-css).
-
-### Before v6.12
-1. Create a folder called "CSS" inside of your Embedded Files in your application
-2. Drag the two CSS files from this repo [*accordion-menu-variables.css*](accordion-menu-variables.css) and [*accordion-menu.css*](accordion-menu.css) into that folder
-3. Paste the link tags below into the *head* property of your application
-```html
-<link rel="stylesheet" href="{EmbeddedFiles}/CSS/accordion-menu.css">
-<link rel="stylesheet" href="{EmbeddedFiles}/CSS/accordion-menu-variables.css">
-``` 
-
-### v6.12+
-1. Create a folder called "CSS" inside of your Embedded Files in your application
-2. Drag the CSS files from this repo [*accordion-menu.css*](accordion-menu.css) into that folder
-3. Paste the link tag below into the *head* property of your application
-```html
-<link rel="stylesheet" href="{EmbeddedFiles}/CSS/accordion-menu.css">
-``` 
-
-### Customising CSS
+## Customising CSS
 1. Open the CSS file called [*accordion-menu-variables.css*](accordion-menu-variables.css) from this repo
-2. Adjust the variables in the *:root* element as you see fit
-3. Stadium 6.12+ users can comment out any variable they do **not** want to customise
-4. Add the [*accordion-menu-variables.css*](accordion-menu-variables.css) to the "CSS" folder in the EmbeddedFiles (overwrite)
-5. Paste the link tag below into the *head* property of your application (if you don't already have it there)
+2. Uncomment and adjust the variables in the *:root* element as you see fit
+3. Add the [*accordion-menu-variables.css*](accordion-menu-variables.css) to the "CSS" folder in the EmbeddedFiles (overwrite)
+4. Paste the link tag below into the *head* property of your application (if you don't already have it there)
 ```html
 <link rel="stylesheet" href="{EmbeddedFiles}/CSS/accordion-menu-variables.css">
-``` 
-6. Add the file to the "CSS" inside of your Embedded Files in your application
+```
+6. Add the file to the "CSS" folder in your "Embedded Files" section in the application
 
-**NOTE: Do not change any of the CSS in the 'accordion-menu.css' file**
+**NOTE: Do not add or remove variables from the 'accordion-menu-variables.css' file**
 
 ## Upgrading Stadium Repos
 Stadium Repos are not static. They change as additional features are added and bugs are fixed. Using the right method to work with Stadium Repos allows for upgrading them in a controlled manner. 
