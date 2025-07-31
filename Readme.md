@@ -145,7 +145,7 @@ function loadCSS() {
    2. OpenMultiple: Set to true if you want to allow opening multiple menus at once (default is false)
    3. OpenParent: Set to false if you don't want the parent menu of the current page to be opened when the page loads (default is true)
 
-## Customising CSS
+## Display Customisations
 1. Open the CSS file called [*accordion-menu-variables.css*](accordion-menu-variables.css) from this repo
 2. Uncomment and adjust the variables in the *:root* element as you see fit
 3. Add the [*accordion-menu-variables.css*](accordion-menu-variables.css) to the "CSS" folder in the EmbeddedFiles (overwrite)
