@@ -146,6 +146,8 @@ function loadCSS() {
    3. OpenParent: Set to false if you don't want the parent menu of the current page to be opened when the page loads (default is true)
 
 ## Display Customisations
+The module allows for some customisations via CSS variables. The variables are commented out by default, so you can uncomment and adjust them as needed.
+
 1. Open the CSS file called [*accordion-menu-variables.css*](accordion-menu-variables.css) from this repo
 2. Uncomment and adjust the variables in the *:root* element as you see fit
 3. Add the [*accordion-menu-variables.css*](accordion-menu-variables.css) to the "CSS" folder in the EmbeddedFiles (overwrite)
