@@ -153,7 +153,6 @@ function loadCSS() {
 ```html
 <link rel="stylesheet" href="{EmbeddedFiles}/CSS/accordion-menu-variables.css">
 ```
-6. Add the file to the "CSS" folder in your "Embedded Files" section in the application
 
 **NOTE: Do not add or remove variables from the 'accordion-menu-variables.css' file**
 
